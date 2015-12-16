@@ -27,10 +27,46 @@ const SchoolCoursesComponent = React.createClass({
   }
 });
 
-ReactDOM.render(
-  <SchoolCoursesComponent
-    name={window.HU.name}
-    courses={window.HU.courses}
-  />,
+const AddCourseForm = React.createClass({
+  propTypes: {
+    name: React.PropTypes.string.isRequired,
+    onSubmit: React.PropTypes.func.isRequired
+  },
+
+  onSubmit (e) {
+    e.preventDefault();
+
+    const courseName = e.target.courseName.value;
+    e.target.reset();
+
+    this.props.onSubmit(courseName);
+  },
+
+  render () {
+    return (
+      <form onSubmit={this.onSubmit}>
+        <input name="courseName" type="text" />
+        <input type="submit" />
+      </form>
+    )
+  }
+});
+
+const renderApp = () => ReactDOM.render(
+  <div>
+    <SchoolCoursesComponent
+      name={window.HU.name}
+      courses={window.HU.courses}
+    />
+    <AddCourseForm
+      name={window.HU.name}
+      onSubmit={(name) => {
+        window.HU.courses.push(name);
+        renderApp();
+      }}
+    />
+  </div>,
   document.getElementById('app')
 );
+
+renderApp();
