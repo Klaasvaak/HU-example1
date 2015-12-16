@@ -1,5 +1,5 @@
 window.HU = {
-  name: 'Hoogeschool Utrecht',
+  name: 'Hogeschool Utrecht',
   courses: [
     'Software Engineering',
     'Pabo',
