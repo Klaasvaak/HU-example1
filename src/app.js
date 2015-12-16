@@ -1,3 +1,4 @@
+const CSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 const SchoolCoursesComponent = React.createClass({
 
@@ -19,9 +20,9 @@ const SchoolCoursesComponent = React.createClass({
       <div>
         <h1>{this.props.name}</h1>
         <h2>Courses:</h2>
-        <ul>
+        <CSSTransitionGroup component="ul" transitionName="list-item-transition" transitionEnterTimeout={400} transitionLeave={false}>
           {this.renderCourses()}
-        </ul>
+        </CSSTransitionGroup>
       </div>
     );
   }
